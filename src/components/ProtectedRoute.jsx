@@ -21,7 +21,8 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   }
 
   if (requiredRole && user.role !== requiredRole) {
-    return <Navigate to="/" replace />;
+    // Redirect to login if user doesn't have the required role
+    return <Navigate to="/login" replace />;
   }
 
   return children;

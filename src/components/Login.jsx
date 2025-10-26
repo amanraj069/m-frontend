@@ -10,7 +10,7 @@ const Login = () => {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, getDashboardRoute } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -28,7 +28,9 @@ const Login = () => {
     const result = await login(formData);
     
     if (result.success) {
-      navigate('/');
+      // Navigate to the appropriate dashboard based on user role
+      const dashboardRoute = getDashboardRoute();
+      navigate(dashboardRoute || '/');
     } else {
       setError(result.error);
     }
@@ -37,7 +39,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-maroon-50 to-maroon-100 p-5">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-navy-50 to-navy-100 p-5">
       <div className="flex max-w-5xl w-full bg-white rounded-3xl overflow-hidden shadow-2xl min-h-[600px] border border-gray-100">
         {/* Left Side - Form */}
         <div className="flex-1 p-12 flex items-center justify-center bg-white">
@@ -59,7 +61,7 @@ const Login = () => {
                   onChange={handleChange}
                   placeholder="Enter your email"
                   required
-                  className="px-4 py-3 border-2 border-gray-300 rounded-lg text-base bg-gray-50 transition-all outline-none text-gray-900 focus:border-maroon-700 focus:bg-white focus:ring-4 focus:ring-maroon-100 placeholder:text-gray-400"
+                  className="px-4 py-3 border-2 border-gray-300 rounded-lg text-base bg-gray-50 transition-all outline-none text-gray-900 focus:border-navy-700 focus:bg-white focus:ring-4 focus:ring-navy-100 placeholder:text-gray-400"
                 />
               </div>
 
@@ -72,7 +74,7 @@ const Login = () => {
                   onChange={handleChange}
                   placeholder="Enter your password"
                   required
-                  className="px-4 py-3 border-2 border-gray-300 rounded-lg text-base bg-gray-50 transition-all outline-none text-gray-900 focus:border-maroon-700 focus:bg-white focus:ring-4 focus:ring-maroon-100 placeholder:text-gray-400"
+                  className="px-4 py-3 border-2 border-gray-300 rounded-lg text-base bg-gray-50 transition-all outline-none text-gray-900 focus:border-navy-700 focus:bg-white focus:ring-4 focus:ring-navy-100 placeholder:text-gray-400"
                 />
               </div>
 
@@ -83,11 +85,11 @@ const Login = () => {
                   value={formData.role}
                   onChange={handleChange}
                   required
-                  className="px-4 py-3 border-2 border-gray-300 rounded-lg text-base bg-gray-50 transition-all outline-none text-gray-900 focus:border-maroon-700 focus:bg-white focus:ring-4 focus:ring-maroon-100"
+                  className="px-4 py-3 border-2 border-gray-300 rounded-lg text-base bg-gray-50 transition-all outline-none text-gray-900 focus:border-navy-700 focus:bg-white focus:ring-4 focus:ring-navy-100"
                 >
                   <option value="">Select role</option>
                   <option value="Freelancer">Freelancer</option>
-                  <option value="Client">Client</option>
+                  <option value="Employer">Employer</option>
                   <option value="Admin">Admin</option>
                 </select>
               </div>
@@ -101,7 +103,7 @@ const Login = () => {
               <button 
                 type="submit" 
                 disabled={loading}
-                className="px-6 py-3.5 rounded-lg font-semibold cursor-pointer transition-all text-base inline-flex items-center justify-center gap-2 bg-gradient-to-r from-maroon-950 via-maroon-900 to-maroon-800 text-white w-full hover:from-maroon-900 hover:via-maroon-800 hover:to-maroon-700 hover:shadow-lg hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
+                className="px-6 py-3.5 rounded-lg font-semibold cursor-pointer transition-all text-base inline-flex items-center justify-center gap-2 bg-gradient-to-r from-navy-950 via-navy-900 to-navy-800 text-white w-full hover:from-navy-900 hover:via-navy-800 hover:to-navy-700 hover:shadow-lg hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
               >
                 {loading ? 'Logging In...' : 'Log In'}
               </button>
@@ -117,7 +119,7 @@ const Login = () => {
         </div>
 
         {/* Right Side - Branding */}
-        <div className="flex-1 bg-gradient-to-br from-maroon-950 via-maroon-900 to-maroon-800 text-white px-12 py-16 flex items-center justify-center relative overflow-hidden">
+        <div className="flex-1 bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 text-white px-12 py-16 flex items-center justify-center relative overflow-hidden">
           <div className="absolute inset-0 opacity-10" style={{
             background: 'radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.2) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%)'
           }}></div>

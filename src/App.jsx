@@ -1,13 +1,39 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import FreelancerDashboard from './components/FreelancerDashboard';
-import EmployerDashboard from './components/EmployerDashboard';
-import AdminDashboard from './components/AdminDashboard';
+
+// Admin Pages
+import AdminHome from './pages/Admin/Home';
+import AdminJobListings from './pages/Admin/JobListings';
+import AdminFreelancers from './pages/Admin/Freelancers';
+import AdminEmployers from './pages/Admin/Employers';
+import AdminComplaints from './pages/Admin/Complaints';
+import AdminQuizzes from './pages/Admin/Quizzes';
+import AdminBlogs from './pages/Admin/Blogs';
+import AdminProfile from './pages/Admin/Profile';
+
+// Employer Pages
+import EmployerHome from './pages/Employer/Home';
+import EmployerProfile from './pages/Employer/Profile';
+import EmployerJobListings from './pages/Employer/JobListings';
+import EmployerCurrentJobs from './pages/Employer/CurrentJobs';
+import EmployerApplications from './pages/Employer/Applications';
+import EmployerWorkHistory from './pages/Employer/WorkHistory';
+import EmployerSubscription from './pages/Employer/Subscription';
+import EmployerTransactions from './pages/Employer/Transactions';
+
+// Freelancer Pages
+import FreelancerHome from './pages/Freelancer/Home';
+import FreelancerProfile from './pages/Freelancer/Profile';
+import FreelancerActiveJobs from './pages/Freelancer/ActiveJobs';
+import FreelancerJobHistory from './pages/Freelancer/JobHistory';
+import FreelancerPayments from './pages/Freelancer/Payments';
+import FreelancerSkillsBadges from './pages/Freelancer/SkillsBadges';
+import FreelancerSubscription from './pages/Freelancer/Subscription';
 
 function App() {
   return (
@@ -19,37 +45,40 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             
-            {/* Protected Routes */}
-            <Route 
-              path="/freelancer/dashboard" 
-              element={
-                <ProtectedRoute requiredRole="Freelancer">
-                  <FreelancerDashboard />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/employer/dashboard" 
-              element={
-                <ProtectedRoute requiredRole="Employer">
-                  <EmployerDashboard />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/admin/dashboard" 
-              element={
-                <ProtectedRoute requiredRole="Admin">
-                  <AdminDashboard />
-                </ProtectedRoute>
-              } 
-            />
+            {/* Admin Routes */}
+            <Route path="/admin/dashboard" element={<Navigate to="/admin/home" replace />} />
+            <Route path="/admin/home" element={<ProtectedRoute requiredRole="Admin"><AdminHome /></ProtectedRoute>} />
+            <Route path="/admin/job-listings" element={<ProtectedRoute requiredRole="Admin"><AdminJobListings /></ProtectedRoute>} />
+            <Route path="/admin/freelancers" element={<ProtectedRoute requiredRole="Admin"><AdminFreelancers /></ProtectedRoute>} />
+            <Route path="/admin/employers" element={<ProtectedRoute requiredRole="Admin"><AdminEmployers /></ProtectedRoute>} />
+            <Route path="/admin/complaints" element={<ProtectedRoute requiredRole="Admin"><AdminComplaints /></ProtectedRoute>} />
+            <Route path="/admin/quizzes" element={<ProtectedRoute requiredRole="Admin"><AdminQuizzes /></ProtectedRoute>} />
+            <Route path="/admin/blogs" element={<ProtectedRoute requiredRole="Admin"><AdminBlogs /></ProtectedRoute>} />
+            <Route path="/admin/profile" element={<ProtectedRoute requiredRole="Admin"><AdminProfile /></ProtectedRoute>} />
+
+            {/* Employer Routes */}
+            <Route path="/employer/dashboard" element={<Navigate to="/employer/home" replace />} />
+            <Route path="/employer/home" element={<ProtectedRoute requiredRole="Employer"><EmployerHome /></ProtectedRoute>} />
+            <Route path="/employer/profile" element={<ProtectedRoute requiredRole="Employer"><EmployerProfile /></ProtectedRoute>} />
+            <Route path="/employer/job-listings" element={<ProtectedRoute requiredRole="Employer"><EmployerJobListings /></ProtectedRoute>} />
+            <Route path="/employer/current-jobs" element={<ProtectedRoute requiredRole="Employer"><EmployerCurrentJobs /></ProtectedRoute>} />
+            <Route path="/employer/applications" element={<ProtectedRoute requiredRole="Employer"><EmployerApplications /></ProtectedRoute>} />
+            <Route path="/employer/work-history" element={<ProtectedRoute requiredRole="Employer"><EmployerWorkHistory /></ProtectedRoute>} />
+            <Route path="/employer/subscription" element={<ProtectedRoute requiredRole="Employer"><EmployerSubscription /></ProtectedRoute>} />
+            <Route path="/employer/transactions" element={<ProtectedRoute requiredRole="Employer"><EmployerTransactions /></ProtectedRoute>} />
+
+            {/* Freelancer Routes */}
+            <Route path="/freelancer/dashboard" element={<Navigate to="/freelancer/home" replace />} />
+            <Route path="/freelancer/home" element={<ProtectedRoute requiredRole="Freelancer"><FreelancerHome /></ProtectedRoute>} />
+            <Route path="/freelancer/profile" element={<ProtectedRoute requiredRole="Freelancer"><FreelancerProfile /></ProtectedRoute>} />
+            <Route path="/freelancer/active-jobs" element={<ProtectedRoute requiredRole="Freelancer"><FreelancerActiveJobs /></ProtectedRoute>} />
+            <Route path="/freelancer/job-history" element={<ProtectedRoute requiredRole="Freelancer"><FreelancerJobHistory /></ProtectedRoute>} />
+            <Route path="/freelancer/payments" element={<ProtectedRoute requiredRole="Freelancer"><FreelancerPayments /></ProtectedRoute>} />
+            <Route path="/freelancer/skills-badges" element={<ProtectedRoute requiredRole="Freelancer"><FreelancerSkillsBadges /></ProtectedRoute>} />
+            <Route path="/freelancer/subscription" element={<ProtectedRoute requiredRole="Freelancer"><FreelancerSubscription /></ProtectedRoute>} />
             
-            {/* Catch all other routes and redirect based on user role */}
-            <Route 
-              path="*" 
-              element={<Home />} 
-            />
+            {/* Catch all other routes */}
+            <Route path="*" element={<Home />} />
           </Routes>
         </div>
       </Router>

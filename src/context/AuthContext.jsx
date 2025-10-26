@@ -13,6 +13,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const apiBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     checkAuthStatus();
@@ -20,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuthStatus = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/auth/me', {
+      const response = await fetch(`${apiBaseUrl}/api/auth/me`, {
         credentials: 'include',
       });
       const data = await response.json();
@@ -35,7 +36,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     try {
-      const response = await fetch('http://localhost:3001/api/auth/login', {
+      const response = await fetch(`${apiBaseUrl}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (userData) => {
     try {
-      const response = await fetch('http://localhost:3001/api/auth/signup', {
+      const response = await fetch(`${apiBaseUrl}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,6 +72,8 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
 
       if (response.ok && data.success) {
+        // Automatically log in the user after successful signup
+        await checkAuthStatus();
         return { success: true };
       } else {
         return { success: false, error: data.error || 'Signup failed' };
@@ -82,7 +85,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await fetch('http://localhost:3001/api/auth/logout', {
+      await fetch(`${apiBaseUrl}/api/auth/logout`, {
         method: 'POST',
         credentials: 'include',
       });
@@ -96,11 +99,11 @@ export const AuthProvider = ({ children }) => {
     if (!user) return null;
     switch (user.role) {
       case 'Admin':
-        return '/admin/dashboard';
+        return '/admin/home';
       case 'Employer':
-        return '/employer/dashboard';
+        return '/employer/home';
       case 'Freelancer':
-        return '/freelancer/dashboard';
+        return '/freelancer/home';
       default:
         return '/';
     }

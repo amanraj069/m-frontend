@@ -1,28 +1,28 @@
 /* Global Styles */
 :root {
-  /* Primary Colors - Maroon Palette */
-  --primary-50: #fef7f7;
-  --primary-100: #fee2e2;
-  --primary-200: #fecaca;
-  --primary-300: #fca5a5;
-  --primary-400: #f87171;
-  --primary-500: #ef4444;
-  --primary-600: #dc2626;
-  --primary-700: #b91c1c;
-  --primary-800: #991b1b;
-  --primary-900: #690606;
+  /* Primary Colors - Navy Blue Palette */
+  --primary-50: #f0f1ff;
+  --primary-100: #e0e7ff;
+  --primary-200: #c7d2fe;
+  --primary-300: #a5b4fc;
+  --primary-400: #818cf8;
+  --primary-500: #6366f1;
+  --primary-600: #4f46e5;
+  --primary-700: #4338ca;
+  --primary-800: #3730a3;
+  --primary-900: #312e81;
 
-  /* Accent Colors - Complementary Maroon Tones */
-  --accent-50: #fdf2f2;
-  --accent-100: #fde8e8;
-  --accent-200: #fbd5d5;
-  --accent-300: #f8b4b4;
-  --accent-400: #f98080;
-  --accent-500: #f56565;
-  --accent-600: #e53e3e;
-  --accent-700: #c53030;
-  --accent-800: #9b2c2c;
-  --accent-900: #690606;
+  /* Accent Colors - Complementary Navy Tones */
+  --accent-50: #f0f4ff;
+  --accent-100: #e0e7ff;
+  --accent-200: #c7d2fe;
+  --accent-300: #a5b4fc;
+  --accent-400: #818cf8;
+  --accent-500: #6366f1;
+  --accent-600: #4f46e5;
+  --accent-700: #4338ca;
+  --accent-800: #3730a3;
+  --accent-900: #312e81;
 
   /* Semantic Colors */
   --success-500: #10b981;
@@ -36,7 +36,7 @@
   --bg-primary: #ffffff;
   --bg-secondary: var(--primary-50);
   --bg-tertiary: var(--primary-100);
-  --bg-overlay: rgba(105, 6, 6, 0.8);
+  --bg-overlay: rgba(49, 46, 129, 0.8);
 
   /* Text Colors */
   --text-primary: var(--primary-900);
@@ -132,9 +132,9 @@ body {
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #4c0303, #690606);
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(105, 6, 6, 0.3);
+  box-shadow: 0 8px 25px rgba(49, 46, 129, 0.3);
 }
 
 .btn-outline {
@@ -202,7 +202,7 @@ body {
 
 .search-form input:focus {
   border-color: var(--primary-700);
-  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
+  box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.1);
 }
 
 .search-form button {
@@ -917,7 +917,7 @@ body {
 }
 
 .milestone-btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #4c0303 0%, #690606 100%);
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
   transform: translateY(-1px);
   box-shadow: var(--shadow-lg);
 }
@@ -971,7 +971,7 @@ body {
 
 .auth-brand-side {
   flex: 1;
-  background: linear-gradient(135deg, #690606 0%, #8b1111 50%, #b91c1c 100%);
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
   color: white;
   padding: 60px 50px;
   display: flex;
@@ -1156,7 +1156,7 @@ body {
 
 .auth-brand-side {
   flex: 1;
-  background: linear-gradient(135deg, #3d0000 0%, #5a0000 50%, #690606 100%);
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
   color: white;
   padding: 60px 50px;
   display: flex;
@@ -1813,13 +1813,13 @@ body {
 .form-field input:focus {
   border-color: var(--primary-700);
   background: var(--bg-primary);
-  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
+  box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.1);
 }
 
 .form-field select:focus {
   border-color: var(--primary-700);
   background: var(--bg-primary);
-  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
+  box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.1);
 }
 
 /* Animation for step transitions */
