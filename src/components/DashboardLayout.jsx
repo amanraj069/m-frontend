@@ -16,7 +16,7 @@ const DashboardLayout = ({ children }) => {
     switch (user?.role) {
       case 'Admin':
         return [
-          { name: 'Home', path: '/admin/home', icon: 'fas fa-home' },
+          { name: 'Home', path: '/', icon: 'fas fa-home' },
           { name: 'Job Listings', path: '/admin/job-listings', icon: 'fas fa-briefcase' },
           { name: 'Freelancers', path: '/admin/freelancers', icon: 'fas fa-users' },
           { name: 'Employers', path: '/admin/employers', icon: 'fas fa-building' },
@@ -27,7 +27,7 @@ const DashboardLayout = ({ children }) => {
         ];
       case 'Employer':
         return [
-          { name: 'Home', path: '/employer/home', icon: 'fas fa-home' },
+          { name: 'Home', path: '/', icon: 'fas fa-home' },
           { name: 'Profile', path: '/employer/profile', icon: 'fas fa-user' },
           { name: 'Job Listings', path: '/employer/job-listings', icon: 'fas fa-briefcase' },
           { name: 'Current Jobs', path: '/employer/current-jobs', icon: 'fas fa-tasks' },
@@ -38,7 +38,7 @@ const DashboardLayout = ({ children }) => {
         ];
       case 'Freelancer':
         return [
-          { name: 'Home', path: '/freelancer/home', icon: 'fas fa-home' },
+          { name: 'Home', path: '/', icon: 'fas fa-home' },
           { name: 'Profile', path: '/freelancer/profile', icon: 'fas fa-user' },
           { name: 'Active Jobs', path: '/freelancer/active-jobs', icon: 'fas fa-briefcase' },
           { name: 'Job History', path: '/freelancer/job-history', icon: 'fas fa-history' },

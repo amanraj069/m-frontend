@@ -10,7 +10,7 @@ const Login = () => {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login, getDashboardRoute } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -28,9 +28,22 @@ const Login = () => {
     const result = await login(formData);
     
     if (result.success) {
-      // Navigate to the appropriate dashboard based on user role
-      const dashboardRoute = getDashboardRoute();
-      navigate(dashboardRoute || '/');
+      // Determine dashboard route based on the selected role
+      let dashboardRoute = '/';
+      switch (formData.role) {
+        case 'Admin':
+          dashboardRoute = '/admin/profile';
+          break;
+        case 'Employer':
+          dashboardRoute = '/employer/profile';
+          break;
+        case 'Freelancer':
+          dashboardRoute = '/freelancer/profile';
+          break;
+        default:
+          dashboardRoute = '/';
+      }
+      navigate(dashboardRoute);
     } else {
       setError(result.error);
     }
