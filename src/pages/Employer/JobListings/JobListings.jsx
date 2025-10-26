@@ -61,7 +61,6 @@ const EmployerJobListings = () => {
   };
 
   const showNotification = (message, type) => {
-    // Simple notification - you can enhance this
     alert(message);
   };
 

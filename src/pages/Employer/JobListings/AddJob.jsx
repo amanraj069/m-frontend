@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import DashboardLayout from '../../components/DashboardLayout';
+import DashboardLayout from '../../../components/DashboardLayout';
 
 const AddJob = () => {
   const navigate = useNavigate();

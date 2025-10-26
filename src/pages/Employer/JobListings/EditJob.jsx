@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import DashboardLayout from '../../components/DashboardLayout';
+import DashboardLayout from '../../../components/DashboardLayout';
 
 const EditJob = () => {
   const { jobId } = useParams();

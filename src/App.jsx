@@ -7,7 +7,6 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 
 // Admin Pages
-import AdminHome from './pages/Admin/Home';
 import AdminJobListings from './pages/Admin/JobListings';
 import AdminFreelancers from './pages/Admin/Freelancers';
 import AdminEmployers from './pages/Admin/Employers';
@@ -17,19 +16,17 @@ import AdminBlogs from './pages/Admin/Blogs';
 import AdminProfile from './pages/Admin/Profile';
 
 // Employer Pages
-import EmployerHome from './pages/Employer/Home';
-import EmployerProfile from './pages/Employer/Profile';
-import EmployerJobListings from './pages/Employer/JobListings';
-import AddJob from './pages/Employer/AddJob';
-import EditJob from './pages/Employer/EditJob';
-import EmployerCurrentJobs from './pages/Employer/CurrentJobs';
-import EmployerApplications from './pages/Employer/Applications';
-import EmployerWorkHistory from './pages/Employer/WorkHistory';
-import EmployerSubscription from './pages/Employer/Subscription';
-import EmployerTransactions from './pages/Employer/Transactions';
+import EmployerProfile from './pages/Employer/Profile/Profile';
+import EmployerJobListings from './pages/Employer/JobListings/JobListings';
+import AddJob from './pages/Employer/JobListings/AddJob';
+import EditJob from './pages/Employer/JobListings/EditJob';
+import EmployerCurrentJobs from './pages/Employer/CurrentJobs/CurrentJobs';
+import EmployerApplications from './pages/Employer/Applications/Applications';
+import EmployerWorkHistory from './pages/Employer/WorkHistory/WorkHistory';
+import EmployerSubscription from './pages/Employer/Subscription/Subscription';
+import EmployerTransactions from './pages/Employer/Transactions/Transactions';
 
 // Freelancer Pages
-import FreelancerHome from './pages/Freelancer/Home';
 import FreelancerProfile from './pages/Freelancer/Profile';
 import FreelancerActiveJobs from './pages/Freelancer/ActiveJobs';
 import FreelancerJobHistory from './pages/Freelancer/JobHistory';
@@ -48,8 +45,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             
             {/* Admin Routes */}
-            <Route path="/admin/dashboard" element={<Navigate to="/admin/home" replace />} />
-            <Route path="/admin/home" element={<ProtectedRoute requiredRole="Admin"><AdminHome /></ProtectedRoute>} />
+            <Route path="/admin/dashboard" element={<Navigate to="/admin/job-listings" replace />} />
+            <Route path="/admin/home" element={<Navigate to="/admin/job-listings" replace />} />
             <Route path="/admin/job-listings" element={<ProtectedRoute requiredRole="Admin"><AdminJobListings /></ProtectedRoute>} />
             <Route path="/admin/freelancers" element={<ProtectedRoute requiredRole="Admin"><AdminFreelancers /></ProtectedRoute>} />
             <Route path="/admin/employers" element={<ProtectedRoute requiredRole="Admin"><AdminEmployers /></ProtectedRoute>} />
@@ -59,8 +56,8 @@ function App() {
             <Route path="/admin/profile" element={<ProtectedRoute requiredRole="Admin"><AdminProfile /></ProtectedRoute>} />
 
             {/* Employer Routes */}
-            <Route path="/employer/dashboard" element={<Navigate to="/employer/home" replace />} />
-            <Route path="/employer/home" element={<ProtectedRoute requiredRole="Employer"><EmployerHome /></ProtectedRoute>} />
+            <Route path="/employer/dashboard" element={<Navigate to="/employer/job-listings" replace />} />
+            <Route path="/employer/home" element={<Navigate to="/employer/job-listings" replace />} />
             <Route path="/employer/profile" element={<ProtectedRoute requiredRole="Employer"><EmployerProfile /></ProtectedRoute>} />
             <Route path="/employer/job-listings" element={<ProtectedRoute requiredRole="Employer"><EmployerJobListings /></ProtectedRoute>} />
             <Route path="/employer/job-listings/new" element={<ProtectedRoute requiredRole="Employer"><AddJob /></ProtectedRoute>} />
@@ -72,8 +69,8 @@ function App() {
             <Route path="/employer/transactions" element={<ProtectedRoute requiredRole="Employer"><EmployerTransactions /></ProtectedRoute>} />
 
             {/* Freelancer Routes */}
-            <Route path="/freelancer/dashboard" element={<Navigate to="/freelancer/home" replace />} />
-            <Route path="/freelancer/home" element={<ProtectedRoute requiredRole="Freelancer"><FreelancerHome /></ProtectedRoute>} />
+            <Route path="/freelancer/dashboard" element={<Navigate to="/freelancer/active-jobs" replace />} />
+            <Route path="/freelancer/home" element={<Navigate to="/freelancer/active-jobs" replace />} />
             <Route path="/freelancer/profile" element={<ProtectedRoute requiredRole="Freelancer"><FreelancerProfile /></ProtectedRoute>} />
             <Route path="/freelancer/active-jobs" element={<ProtectedRoute requiredRole="Freelancer"><FreelancerActiveJobs /></ProtectedRoute>} />
             <Route path="/freelancer/job-history" element={<ProtectedRoute requiredRole="Freelancer"><FreelancerJobHistory /></ProtectedRoute>} />
