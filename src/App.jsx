@@ -20,6 +20,8 @@ import AdminProfile from './pages/Admin/Profile';
 import EmployerHome from './pages/Employer/Home';
 import EmployerProfile from './pages/Employer/Profile';
 import EmployerJobListings from './pages/Employer/JobListings';
+import AddJob from './pages/Employer/AddJob';
+import EditJob from './pages/Employer/EditJob';
 import EmployerCurrentJobs from './pages/Employer/CurrentJobs';
 import EmployerApplications from './pages/Employer/Applications';
 import EmployerWorkHistory from './pages/Employer/WorkHistory';
@@ -61,6 +63,8 @@ function App() {
             <Route path="/employer/home" element={<ProtectedRoute requiredRole="Employer"><EmployerHome /></ProtectedRoute>} />
             <Route path="/employer/profile" element={<ProtectedRoute requiredRole="Employer"><EmployerProfile /></ProtectedRoute>} />
             <Route path="/employer/job-listings" element={<ProtectedRoute requiredRole="Employer"><EmployerJobListings /></ProtectedRoute>} />
+            <Route path="/employer/job-listings/new" element={<ProtectedRoute requiredRole="Employer"><AddJob /></ProtectedRoute>} />
+            <Route path="/employer/job-listings/edit/:jobId" element={<ProtectedRoute requiredRole="Employer"><EditJob /></ProtectedRoute>} />
             <Route path="/employer/current-jobs" element={<ProtectedRoute requiredRole="Employer"><EmployerCurrentJobs /></ProtectedRoute>} />
             <Route path="/employer/applications" element={<ProtectedRoute requiredRole="Employer"><EmployerApplications /></ProtectedRoute>} />
             <Route path="/employer/work-history" element={<ProtectedRoute requiredRole="Employer"><EmployerWorkHistory /></ProtectedRoute>} />
