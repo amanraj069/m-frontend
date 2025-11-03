@@ -9,8 +9,8 @@ import Signup from './components/Signup';
 // Public Pages
 import PublicJobListing from './pages/Public_JobListing/PublicJobListing';
 import JobDescription from './pages/Public_JobListing/JobDescription';
-import BlogList from './pages/Public_BlogPages/BlogList';
-import BlogDetail from './pages/Public_BlogPages/BlogDetail';
+import BlogList from './components/Home/BlogList';
+import BlogDetail from './components/Home/BlogDetail';
 
 // Admin Pages
 import AdminJobListings from './pages/Admin/JobListings';
