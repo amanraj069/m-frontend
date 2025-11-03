@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import BlogSection from './Home/BlogSection';
 
 const Home = () => {
   const { user, getDashboardRoute } = useAuth();
@@ -359,6 +360,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Blog Section */}
+      <BlogSection />
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 text-white text-center">

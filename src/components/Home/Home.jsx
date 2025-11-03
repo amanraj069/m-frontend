@@ -6,6 +6,7 @@ import StatsSection from './StatsSection';
 import FeaturesSection from './FeaturesSection';
 import FreelancersSection from './FreelancersSection';
 import TestimonialsSection from './TestimonialsSection';
+import BlogSection from './BlogSection';
 import CtaSection from './CtaSection';
 import Footer from './Footer';
 
@@ -131,6 +132,7 @@ const Home = () => {
         prevTestimonial={prevTestimonial}
         nextTestimonial={nextTestimonial}
       />
+      <BlogSection />
       <CtaSection />
       <Footer />
     </div>

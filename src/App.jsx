@@ -6,6 +6,12 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 
+// Public Pages
+import PublicJobListing from './pages/Public_JobListing/PublicJobListing';
+import JobDescription from './pages/Public_JobListing/JobDescription';
+import BlogList from './pages/Public_BlogPages/BlogList';
+import BlogDetail from './pages/Public_BlogPages/BlogDetail';
+
 // Admin Pages
 import AdminJobListings from './pages/Admin/JobListings';
 import AdminFreelancers from './pages/Admin/Freelancers';
@@ -43,6 +49,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/jobs" element={<PublicJobListing />} />
+            <Route path="/jobs/:jobId" element={<JobDescription />} />
+            <Route path="/blogs" element={<BlogList />} />
+            <Route path="/blogs/:blogId" element={<BlogDetail />} />
             
             {/* Admin Routes */}
             <Route path="/admin/dashboard" element={<Navigate to="/admin/job-listings" replace />} />
