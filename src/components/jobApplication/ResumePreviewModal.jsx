@@ -14,7 +14,7 @@ const ResumePreviewModal = ({ resumeUrl, onClose }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-container modal-large" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h3>Resume Preview</h3>
+          <p className='text-2xl font-serif'>Resume Preview</p> 
           <button className="modal-close" onClick={onClose}>
             <i className="fas fa-times"></i>
           </button>

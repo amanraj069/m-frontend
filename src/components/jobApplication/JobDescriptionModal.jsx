@@ -10,7 +10,7 @@ const JobDescriptionModal = ({ jobData, onClose }) => {
             <i className="fas fa-times"></i>
           </button>
         </div>
-        <div className="modal-body">
+        <div className="modal-body-1">
           <div className="job-detail-section">
             <h4>{jobData?.title}</h4>
             <div className="job-meta-grid">

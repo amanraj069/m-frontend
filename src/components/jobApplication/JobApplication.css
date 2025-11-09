@@ -690,6 +690,11 @@
   overflow-y: hidden;
   flex: 1;
 }
+.modal-body-1 {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
 
 .modal-body-resume {
   padding: 0;
