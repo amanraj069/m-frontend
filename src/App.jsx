@@ -11,7 +11,6 @@ import PublicJobListing from './pages/Public_JobListing/PublicJobListing';
 import JobDescription from './pages/Public_JobListing/JobDescription';
 import BlogList from './components/Home/BlogList';
 import BlogDetail from './components/Home/BlogDetail';
-import JobApplication from './components/jobApplication/JobApplication';
 
 // Admin Pages
 import AdminJobListings from './pages/Admin/JobListings';
@@ -52,7 +51,6 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/jobs" element={<PublicJobListing />} />
             <Route path="/jobs/:jobId" element={<JobDescription />} />
-            <Route path="/jobs/apply/:jobId" element={<ProtectedRoute requiredRole="Freelancer"><JobApplication /></ProtectedRoute>} />
             <Route path="/blogs" element={<BlogList />} />
             <Route path="/blogs/:blogId" element={<BlogDetail />} />
             
