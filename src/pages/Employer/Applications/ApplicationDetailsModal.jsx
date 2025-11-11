@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './ApplicationDetailsModal.css';
 
 const ApplicationDetailsModal = ({ application, onClose }) => {
   const navigate = useNavigate();
@@ -14,33 +15,46 @@ const ApplicationDetailsModal = ({ application, onClose }) => {
     navigate(`/jobs/${application.jobId}`);
   };
 
+  const [closing, setClosing] = useState(false);
+
+  useEffect(() => {
+    // disable scrolling on body while modal open
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
+  const startClose = () => {
+    setClosing(true);
+    // match CSS animation durations (overlay out 180ms, panel out 180ms)
+    setTimeout(() => {
+      onClose && onClose();
+    }, 200);
+  };
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={onClose}>
-      <div 
-        className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+    <div className={`app-modal-backdrop ${closing ? 'closing' : ''}`} onClick={startClose}>
+      <div
+        className={`app-modal-panel ${closing ? 'closing' : ''}`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6 rounded-t-2xl">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <img
-                src={application.freelancerPicture || '/default-avatar.png'}
-                alt={application.freelancerName}
-                className="w-16 h-16 rounded-full object-cover border-4 border-white shadow-lg"
-              />
-              <div>
-                <h2 className="text-2xl font-bold">{application.freelancerName || 'Unknown Applicant'}</h2>
-                <p className="text-blue-100 text-sm">Candidate Application Details</p>
-              </div>
+        <div className="flex items-center justify-between p-6 border-b border-gray-100 rounded-t-lg">
+          <div className="flex items-center gap-4">
+            <img
+              src={application.freelancerPicture || '/default-avatar.png'}
+              alt={application.freelancerName}
+              className="w-16 h-16 rounded-full object-cover border-2 border-gray-100 shadow-sm"
+            />
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800">{application.freelancerName || 'Unknown Applicant'}</h2>
+              <p className="text-sm text-gray-500">Candidate Application Details</p>
             </div>
-            <button 
-              onClick={onClose}
-              className="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2 transition-colors"
-            >
-              <i className="fas fa-times text-xl"></i>
-            </button>
           </div>
+          <button onClick={startClose} className="app-modal-close-btn" aria-label="Close">
+            <i className="fas fa-times"></i>
+          </button>
         </div>
 
         {/* Body */}
@@ -88,15 +102,6 @@ const ApplicationDetailsModal = ({ application, onClose }) => {
               <p className="text-gray-800 font-medium">
                 {application.freelancerEmail || 'Not provided'}
               </p>
-              {application.freelancerEmail && (
-                <a 
-                  href={`mailto:${application.freelancerEmail}`}
-                  className="text-blue-600 hover:text-blue-700 text-sm mt-1 inline-block"
-                >
-                  <i className="fas fa-paper-plane mr-1"></i>
-                  Send Email
-                </a>
-              )}
             </div>
 
             <div className="border border-gray-200 rounded-lg p-4">
@@ -107,15 +112,6 @@ const ApplicationDetailsModal = ({ application, onClose }) => {
               <p className="text-gray-800 font-medium">
                 {application.freelancerPhone || 'Not provided'}
               </p>
-              {application.freelancerPhone && (
-                <a 
-                  href={`tel:${application.freelancerPhone}`}
-                  className="text-blue-600 hover:text-blue-700 text-sm mt-1 inline-block"
-                >
-                  <i className="fas fa-phone-alt mr-1"></i>
-                  Call Now
-                </a>
-              )}
             </div>
           </div>
 
