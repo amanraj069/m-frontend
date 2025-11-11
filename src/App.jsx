@@ -35,7 +35,7 @@ import EmployerTransactions from './pages/Employer/Transactions/Transactions';
 
 // Freelancer Pages
 import FreelancerProfile from './pages/Freelancer/Profile';
-import FreelancerActiveJobs from './pages/Freelancer/ActiveJobs';
+import FreelancerActiveJobs from './pages/Freelancer/ActiveJobs/ActiveJobs';
 import FreelancerJobHistory from './pages/Freelancer/JobHistory';
 import FreelancerPayments from './pages/Freelancer/Payments';
 import FreelancerSkillsBadges from './pages/Freelancer/SkillsBadges';
