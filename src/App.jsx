@@ -39,7 +39,7 @@ import FreelancerActiveJobs from './pages/Freelancer/ActiveJobs/ActiveJobs';
 import FreelancerJobHistory from './pages/Freelancer/JobHistory';
 import FreelancerPayments from './pages/Freelancer/Payments';
 import FreelancerSkillsBadges from './pages/Freelancer/SkillsBadges';
-import FreelancerSubscription from './pages/Freelancer/Subscription';
+import FreelancerSubscription from './pages/Freelancer/Subscription/Subscription';
 
 function App() {
   return (
