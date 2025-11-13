@@ -12,6 +12,12 @@ const Signup = () => {
     role: ''
   });
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -19,11 +25,71 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
-    setError(''); // Clear error when user types
+    
+    // Real-time validation for name field
+    if (name === 'name') {
+      if (value.trim() === '') {
+        setFieldErrors(prev => ({ ...prev, name: 'Full name is required' }));
+      } else if (value.trim().length < 2) {
+        setFieldErrors(prev => ({ ...prev, name: 'Name must be at least 2 characters' }));
+      } else {
+        setFieldErrors(prev => ({ ...prev, name: '' }));
+      }
+    }
+    // Real-time validation for email field
+    else if (name === 'email') {
+      if (value.trim() === '') {
+        setFieldErrors(prev => ({ ...prev, email: 'Email is required' }));
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+        setFieldErrors(prev => ({ ...prev, email: 'Please enter a valid email address' }));
+      } else {
+        setFieldErrors(prev => ({ ...prev, email: '' }));
+      }
+    }
+    // Real-time validation for password field
+    else if (name === 'password') {
+      if (value === '') {
+        setFieldErrors(prev => ({ ...prev, password: 'Password is required' }));
+      } else if (value.length < 6) {
+        setFieldErrors(prev => ({ ...prev, password: 'Password must be at least 6 characters' }));
+      } else if (!/[A-Z]/.test(value)) {
+        setFieldErrors(prev => ({ ...prev, password: 'Password must contain at least one capital letter' }));
+      } else if (!/[0-9]/.test(value)) {
+        setFieldErrors(prev => ({ ...prev, password: 'Password must contain at least one digit' }));
+      } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+        setFieldErrors(prev => ({ ...prev, password: 'Password must contain at least one special character' }));
+      } else {
+        setFieldErrors(prev => ({ ...prev, password: '' }));
+      }
+      
+      // Also validate confirm password if it has a value
+      if (formData.confirmPassword) {
+        if (formData.confirmPassword !== value) {
+          setFieldErrors(prev => ({ ...prev, confirmPassword: 'Passwords do not match' }));
+        } else {
+          setFieldErrors(prev => ({ ...prev, confirmPassword: '' }));
+        }
+      }
+    }
+    // Real-time validation for confirm password field
+    else if (name === 'confirmPassword') {
+      if (value === '') {
+        setFieldErrors(prev => ({ ...prev, confirmPassword: 'Please confirm your password' }));
+      } else if (value !== formData.password) {
+        setFieldErrors(prev => ({ ...prev, confirmPassword: 'Passwords do not match' }));
+      } else {
+        setFieldErrors(prev => ({ ...prev, confirmPassword: '' }));
+      }
+    }
+    
+    // Clear general error when user types
+    setError('');
   };
 
   const handleNextStep = (e) => {
@@ -114,12 +180,12 @@ const Signup = () => {
                   <p className="text-base text-gray-600">Let's start with the basics</p>
                 </div>
                 
-                {error && (
+                {/* {error && (
                   <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-5 flex items-center gap-2 text-sm font-medium">
                     <i className="fas fa-exclamation-circle"></i>
                     {error}
                   </div>
-                )}
+                )} */}
 
                 <form onSubmit={handleNextStep} className="flex flex-col gap-5">
                   <div className="flex flex-col gap-1.5">
@@ -132,8 +198,19 @@ const Signup = () => {
                       placeholder="Enter your full name"
                       autoComplete="name"
                       autoFocus
-                      className="px-4 py-3 border-2 border-gray-300 rounded-lg text-base bg-gray-50 transition-all outline-none text-gray-900 focus:border-navy-700 focus:bg-white focus:ring-4 focus:ring-navy-100 placeholder:text-gray-400"
+                      className={`px-4 py-3 border-2 rounded-lg text-base bg-white transition-all outline-none text-gray-900 placeholder:text-gray-400 ${
+                        fieldErrors.name 
+                          ? 'border-rose-400 focus:border-rose-500 focus:ring-4 focus:ring-rose-50' 
+                          : formData.name.trim().length >= 2 
+                            ? 'border-emerald-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50' 
+                            : 'border-gray-300 focus:border-navy-500 focus:ring-4 focus:ring-navy-50'
+                      }`}
                     />
+                    {fieldErrors.name && (
+                      <div className="text-rose-600 text-sm mt-1">
+                        {fieldErrors.name}
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex flex-col gap-1.5">
@@ -145,8 +222,19 @@ const Signup = () => {
                       onChange={handleChange}
                       placeholder="Enter your email address"
                       autoComplete="email"
-                      className="px-4 py-3 border-2 border-gray-300 rounded-lg text-base bg-gray-50 transition-all outline-none text-gray-900 focus:border-navy-700 focus:bg-white focus:ring-4 focus:ring-navy-100 placeholder:text-gray-400"
+                      className={`px-4 py-3 border-2 rounded-lg text-base bg-white transition-all outline-none text-gray-900 placeholder:text-gray-400 ${
+                        fieldErrors.email 
+                          ? 'border-rose-400 focus:border-rose-500 focus:ring-4 focus:ring-rose-50' 
+                          : formData.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) 
+                            ? 'border-emerald-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50' 
+                            : 'border-gray-300 focus:border-navy-500 focus:ring-4 focus:ring-navy-50'
+                      }`}
                     />
+                    {fieldErrors.email && (
+                      <div className="text-rose-600 text-sm mt-1">
+                        {fieldErrors.email}
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex flex-col gap-1.5">
@@ -218,9 +306,19 @@ const Signup = () => {
                         value={formData.password}
                         onChange={handleChange}
                         placeholder="Create a strong password"
-                        autoComplete="new-password"
+                        autoComplete="off"
                         autoFocus
-                        className="px-4 py-3 pr-12 border-2 border-gray-300 rounded-lg text-base bg-gray-50 transition-all outline-none text-gray-900 focus:border-navy-700 focus:bg-white focus:ring-4 focus:ring-navy-100 placeholder:text-gray-400 w-full"
+                        className={`px-4 py-3 pr-12 border-2 rounded-lg text-base bg-white transition-all outline-none text-gray-900 placeholder:text-gray-400 w-full ${
+                          fieldErrors.password 
+                            ? 'border-rose-400 focus:border-rose-500 focus:ring-4 focus:ring-rose-50' 
+                            : formData.password && 
+                              formData.password.length >= 6 && 
+                              /[A-Z]/.test(formData.password) && 
+                              /[0-9]/.test(formData.password) && 
+                              /[!@#$%^&*(),.?":{}|<>]/.test(formData.password)
+                              ? 'border-emerald-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50' 
+                              : 'border-gray-300 focus:border-navy-500 focus:ring-4 focus:ring-navy-50'
+                        }`}
                       />
                       <button
                         type="button"
@@ -230,9 +328,15 @@ const Signup = () => {
                         <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
                       </button>
                     </div>
-                    <div className="text-xs text-gray-500 mt-1">
-                      At least 6 characters
-                    </div>
+                    {fieldErrors.password ? (
+                      <div className="text-rose-600 text-xs mt-1">
+                        {fieldErrors.password}
+                      </div>
+                    ) : (
+                      <div className="text-xs text-gray-500 mt-1">
+                        Min 6 characters, 1 capital, 1 digit, 1 special character
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex flex-col gap-1.5">
@@ -244,8 +348,14 @@ const Signup = () => {
                         value={formData.confirmPassword}
                         onChange={handleChange}
                         placeholder="Confirm your password"
-                        autoComplete="new-password"
-                        className="px-4 py-3 pr-12 border-2 border-gray-300 rounded-lg text-base bg-gray-50 transition-all outline-none text-gray-900 focus:border-navy-700 focus:bg-white focus:ring-4 focus:ring-navy-100 placeholder:text-gray-400 w-full"
+                        autoComplete="off"
+                        className={`px-4 py-3 pr-12 border-2 rounded-lg text-base bg-white transition-all outline-none text-gray-900 placeholder:text-gray-400 w-full ${
+                          fieldErrors.confirmPassword 
+                            ? 'border-rose-400 focus:border-rose-500 focus:ring-4 focus:ring-rose-50' 
+                            : formData.confirmPassword && formData.confirmPassword === formData.password
+                              ? 'border-emerald-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50' 
+                              : 'border-gray-300 focus:border-navy-500 focus:ring-4 focus:ring-navy-50'
+                        }`}
                       />
                       <button
                         type="button"
@@ -255,6 +365,11 @@ const Signup = () => {
                         <i className={`fas ${showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
                       </button>
                     </div>
+                    {fieldErrors.confirmPassword && (
+                      <div className="text-rose-600 text-xs mt-1">
+                        {fieldErrors.confirmPassword}
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex gap-3 mt-6">
