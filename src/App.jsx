@@ -11,6 +11,7 @@ import PublicJobListing from './pages/Public_JobListing/PublicJobListing';
 import JobDescription from './pages/Public_JobListing/JobDescription';
 import BlogList from './components/Home/BlogList';
 import BlogDetail from './components/Home/BlogDetail';
+import JobApplication from './components/jobApplication/JobApplication';
 
 // Admin Pages
 import AdminJobListings from './pages/Admin/JobListings';
@@ -34,11 +35,11 @@ import EmployerTransactions from './pages/Employer/Transactions/Transactions';
 
 // Freelancer Pages
 import FreelancerProfile from './pages/Freelancer/Profile';
-import FreelancerActiveJobs from './pages/Freelancer/ActiveJobs';
+import FreelancerActiveJobs from './pages/Freelancer/ActiveJobs/ActiveJobs';
 import FreelancerJobHistory from './pages/Freelancer/JobHistory';
 import FreelancerPayments from './pages/Freelancer/Payments';
 import FreelancerSkillsBadges from './pages/Freelancer/SkillsBadges';
-import FreelancerSubscription from './pages/Freelancer/Subscription';
+import FreelancerSubscription from './pages/Freelancer/Subscription/Subscription';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/jobs" element={<PublicJobListing />} />
             <Route path="/jobs/:jobId" element={<JobDescription />} />
+            <Route path="/jobs/apply/:jobId" element={<ProtectedRoute requiredRole="Freelancer"><JobApplication /></ProtectedRoute>} />
             <Route path="/blogs" element={<BlogList />} />
             <Route path="/blogs/:blogId" element={<BlogDetail />} />
             
